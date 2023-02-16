@@ -34,11 +34,11 @@ export async function deleteTask(req, res) {
 
 
 export async function updateTask(req, res) {
-    const { tasks } = req.body
+    const { done } = req.body
     const { taskId } = req.params
 
     const db = await dbConnect()
-    db.collection('tasks').doc(taskId).update({ tasks })
+    db.collection('tasks').doc(taskId).update({ done })
         // here we are sending the updatedTasks back to getAllTasks and it will send back the update task and all other tasks
         .then(() => getAllTasks(req, res))
         .catch(err => res.status(500).send({ error: err.message }))
